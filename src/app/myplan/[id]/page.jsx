@@ -1,12 +1,18 @@
 // import React from 'react';
 
+// import { userContext } from "@/app/context/UserProvider";
+import Btn from "@/Components/btn";
 import Image from "next/image";
+// import { useContext } from "react";
 
 const page = async ({ params }) => {
     const { id } = await params;
     // console.log(id);
     const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
     const data = await res.json();
+
+
+
     return (
         <div className="bg-black">
             <div className="bg-[#0f1115] text-white p-6 md:p-10 rounded-2xl max-w-5xl mx-auto shadow-2xl my-7">
@@ -96,20 +102,7 @@ const page = async ({ params }) => {
                         </div>
 
 
-                        <div className="flex flex-wrap gap-3 pt-2">
-                            <button className="btn bg-lime-400 hover:bg-lime-500 text-black border-0 font-bold text-xs uppercase rounded-lg px-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                </svg>
-                                Add to today's plan
-                            </button>
-                            <button className="btn btn-outline border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white text-xs uppercase font-medium rounded-lg px-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                                </svg>
-                                Save for later
-                            </button>
-                        </div>
+                        <Btn data={data}></Btn>
 
                     </div>
                 </div>

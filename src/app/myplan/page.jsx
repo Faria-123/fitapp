@@ -3,7 +3,7 @@
 const page = () => {
     return (
         <div>
-            from myplan pages
+
         </div>
     );
 };
