@@ -2,6 +2,7 @@
 "use client"
 import { useContext, useState } from "react";
 import { userContext } from "../context/UserProvider";
+import Selected from "@/Components/Selected";
 
 const page = () => {
     const {
@@ -101,7 +102,7 @@ const page = () => {
 
                         <button
                             onClick={() => setState("save")}
-                            className={`tab h-7 min-h-7 px-5 text-[10px] font-medium rounded-md ${state === "saved"
+                            className={`tab h-7 min-h-7 px-5 text-[10px] font-medium rounded-md ${state === "save"
                                 ? "bg-[#252b34] text-white"
                                 : "text-gray-500"
                                 }`}
@@ -119,34 +120,50 @@ const page = () => {
 
 
                 {/* Empty State */}
-                <div className="border-b border-dashed border-gray-800 min-h-[165px] flex items-center justify-center">
 
-                    <div className="text-center">
+                {
+                    Plan.length === 0 && saved.length === 0 && <div className="border-b border-dashed border-gray-800 min-h-[165px] flex items-center justify-center">
 
-                        {/* Heading */}
-                        <h2 className="text-[12px] font-black tracking-wide uppercase text-gray-200">
-                            Nothing Here Yet
-                        </h2>
+                        <div className="text-center">
 
-                        {/* Description */}
-                        <p className="mt-1 text-[8px] text-gray-500">
-                            Browse the library and add a lift to get today moving.
-                        </p>
+                            {/* Heading */}
+                            <h2 className="text-[12px] font-black tracking-wide uppercase text-gray-200">
+                                Nothing Here Yet
+                            </h2>
 
-                        {/* Button */}
-                        <button
-                            className="btn btn-sm min-h-0 h-7 mt-4 px-5 rounded-full
+                            {/* Description */}
+                            <p className="mt-1 text-[8px] text-gray-500">
+                                Browse the library and add a lift to get today moving.
+                            </p>
+
+                            {/* Button */}
+                            <button
+                                className="btn btn-sm min-h-0 h-7 mt-4 px-5 rounded-full
                         bg-lime-400 hover:bg-lime-300
                         border-none text-black
                         text-[8px] font-bold
                         shadow-[0_0_15px_rgba(163,230,53,0.25)]"
-                        >
-                            Go to workouts
-                        </button>
+                            >
+                                Go to workouts
+                            </button>
+
+                        </div>
 
                     </div>
+                }
+                {
+                    state === "plan" &&
+                    Plan.map((p, ind) => (
+                        <Selected p={p} key={ind} />
+                    ))
+                }
 
-                </div>
+                {
+                    state === "save" &&
+                    saved.map((p, ind) => (
+                        <Selected p={p} key={ind} />
+                    ))
+                }
 
             </div>
 
