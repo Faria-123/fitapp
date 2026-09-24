@@ -1,8 +1,27 @@
 "use client";
 
+import { userContext } from "@/app/context/UserProvider";
 import Image from "next/image";
+import Link from "next/link";
+import { useContext } from "react";
+import { toast } from "react-toastify";
 
-const Selected = ({ p }) => {
+const Selected = ({ p, state }) => {
+    const {
+        Plan, setPlan, saved, setSaved
+    } = useContext(userContext);
+    const delbtn = () => {
+        if (state === "plan") {
+            toast.success("Sucessfully Deleted");
+            const newData = Plan.filter((pl) => pl.id !== p.id);
+            setPlan(newData);
+        }
+        else if (state === "save") {
+            toast.success("Sucessfully Deleted");
+            const newDataa = saved.filter((sv) => sv.id !== p.id);
+            setSaved(newDataa);
+        }
+    }
     return (
         <div className="w-full rounded-lg border border-gray-700 bg-[#12161c] p-3">
             <div className="flex items-center justify-between gap-4">
@@ -42,15 +61,17 @@ const Selected = ({ p }) => {
                 {/* Right side */}
                 <div className="flex items-center gap-2">
 
-                    <button className="rounded-full border border-gray-600 px-4 py-2 text-xs text-white transition hover:bg-gray-800">
-                        View Details
-                    </button>
+                    <Link href={`/myplan/${p.id}`}>
+                        <button className="rounded-full border border-gray-600 px-4 py-2 text-xs text-white transition hover:bg-gray-800">
+                            View Details
+                        </button>
+                    </Link>
 
                     <button className="rounded-full bg-lime-400 px-4 py-2 text-xs font-semibold text-black transition hover:bg-lime-300">
                         ✓ Mark as Done
                     </button>
 
-                    <button className="ml-1 text-gray-500 hover:text-white">
+                    <button onClick={delbtn} className="ml-1 text-gray-500 hover:text-white">
                         ×
                     </button>
 

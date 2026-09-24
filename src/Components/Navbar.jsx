@@ -5,7 +5,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import img from "../assets/logo.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { userContext } from "@/app/context/UserProvider";
 
 const Navbar = () => {
     const [state, setState] = useState("");
@@ -14,6 +15,9 @@ const Navbar = () => {
         setState(value);
         setMenuOpen(false);
     };
+    const {
+        Plan, setPlan, saved, setSaved
+    } = useContext(userContext);
 
     return (
         <div className="bg-black">
@@ -84,7 +88,7 @@ const Navbar = () => {
                         >
                             Plan{" "}
                             <span className="text-[#C2F800]">
-                                (0)
+                                ({Plan.length})
                             </span>
                         </Link>
 
@@ -97,7 +101,7 @@ const Navbar = () => {
                         >
                             Saved{" "}
                             <span className="text-[#C2F800]">
-                                (0)
+                                ({saved.length})
                             </span>
                         </Link>
 

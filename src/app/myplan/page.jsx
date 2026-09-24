@@ -10,23 +10,23 @@ const page = () => {
     } = useContext(userContext);
     const [state, setState] = useState("plan");
     return (
-        <div>
-            <div>
-                <h1 className="text-3xl font-bold">MY PLAN</h1>
+        <div className="bg-black">
+            <div className="container mx-auto">
+                <h1 className="text-3xl text-white font-bold">MY PLAN</h1>
                 <p className="text-gray-400">Cap of five lifts for today. Finish them, then load more.</p>
             </div>
-            <div>
+            <div className="bg-[#13161D] p-3.5 container mx-auto my-3">
                 {
                     state === "plan" && <div>
 
                         <div className="flex justify-between">
-                            <div className="flex justify-center items-center">
-                                <p>Exercises</p>
-                                <p>{Plan.length}</p>
+                            <div className="space-y-1">
+                                <p className=" text-gray-400">Exercises</p>
+                                <p className="text-4xl text-yellow-400">{Plan.length}</p>
                             </div>
-                            <div className="flex justify-center items-center">
-                                <p>Minutes</p>
-                                <p>
+                            <div className="space-y-1">
+                                <p className=" text-gray-400">Minutes</p>
+                                <p className="text-white font-bold text-4xl">
                                     {Plan.reduce((total, exercise) => {
                                         return total + exercise.duration;
                                     }, 0)
@@ -34,9 +34,9 @@ const page = () => {
                                 </p>
 
                             </div>
-                            <div className="flex justify-center items-center">
-                                <p>Calories</p>
-                                <p>
+                            <div className="space-y-1">
+                                <p className=" text-gray-400">Calories</p>
+                                <p className=" text-4xl text-white font-bold">
                                     {
                                         Plan.reduce((t, p) => {
                                             return t + p.caloriesBurned
@@ -53,13 +53,13 @@ const page = () => {
                     state === "save" && <div>
 
                         <div className="flex justify-between">
-                            <div className="flex justify-center items-center">
-                                <p>Exercises</p>
-                                <p>{saved.length}</p>
+                            <div className="space-y-1">
+                                <p className=" text-gray-400">Exercises</p>
+                                <p className="text-4xl text-yellow-400">{saved.length}</p>
                             </div>
-                            <div className="flex justify-center items-center">
-                                <p>Minutes</p>
-                                <p>
+                            <div className="space-y-1">
+                                <p className=" text-gray-400">Minutes</p>
+                                <p className="text-white font-bold text-4xl">
                                     {saved.reduce((total, exercise) => {
                                         return total + exercise.duration;
                                     }, 0)
@@ -67,9 +67,9 @@ const page = () => {
                                 </p>
 
                             </div>
-                            <div className="flex justify-center items-center">
-                                <p>Calories</p>
-                                <p>
+                            <div className="space-y-1">
+                                <p className=" text-gray-400">Calories</p>
+                                <p className="text-white font-bold text-4xl">
                                     {
                                         saved.reduce((t, p) => {
                                             return t + p.caloriesBurned
@@ -83,7 +83,7 @@ const page = () => {
                 }
             </div>
 
-            <div className="min-h-screen bg-[#0d1014] text-white px-4 md:px-8 py-6">
+            <div className="min-h-screen bg-[#0d1014] text-white px-4 md:px-8 py-6 container mx-auto">
 
                 {/* Tabs */}
                 <div className="flex items-center justify-between border-b border-dashed border-gray-800 pb-4">
@@ -154,14 +154,14 @@ const page = () => {
                 {
                     state === "plan" &&
                     Plan.map((p, ind) => (
-                        <Selected p={p} key={ind} />
+                        <Selected p={p} state={state} key={ind} />
                     ))
                 }
 
                 {
                     state === "save" &&
                     saved.map((p, ind) => (
-                        <Selected p={p} key={ind} />
+                        <Selected p={p} state={state} key={ind} />
                     ))
                 }
 
