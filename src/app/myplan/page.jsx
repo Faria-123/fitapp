@@ -9,6 +9,23 @@ const page = () => {
         Plan, setPlan, saved, setSaved
     } = useContext(userContext);
     const [state, setState] = useState("plan");
+    const [sortBy, setSortBy] = useState("duration");
+    const currentData = state === "plan" ? Plan : saved;
+    const sortedData = [...currentData].sort((a, b) => {
+        if (sortBy === "duration") {
+            return a.duration - b.duration;
+        }
+
+        if (sortBy === "calories") {
+            return a.caloriesBurned - b.caloriesBurned;
+        }
+
+        if (sortBy === "rating") {
+            return a.rating - b.rating;
+        }
+
+        return 0;
+    });
     return (
         <div className="bg-black">
             <div className="container mx-auto">
@@ -85,7 +102,7 @@ const page = () => {
 
             <div className="min-h-screen bg-[#0d1014] text-white px-4 md:px-8 py-6 container mx-auto">
 
-                {/* Tabs */}
+
                 <div className="flex items-center justify-between border-b border-dashed border-gray-800 pb-4">
 
                     <div className="tabs tabs-box bg-[#171b21] p-1 rounded-lg">
@@ -112,31 +129,53 @@ const page = () => {
 
                     </div>
 
-                    {/* Right side small text */}
-                    <span className="text-[9px] text-gray-600">
-                        5 MAX
-                    </span>
+
+                    <div className="flex items-center gap-3">
+
+                        <span className="text-[9px] text-gray-500">
+                            Sort By
+                        </span>
+
+                        <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className="select select-xs h-7 min-h-7 rounded-md border border-gray-700 bg-[#171b21] text-[9px] text-gray-300 outline-none"
+                        >
+                            <option value="duration">
+                                Duration
+                            </option>
+
+                            <option value="calories">
+                                Calories
+                            </option>
+
+                            <option value="rating">
+                                Rating
+                            </option>
+                        </select>
+
+                    </div>
                 </div>
 
 
-                {/* Empty State */}
+
 
                 {
                     Plan.length === 0 && saved.length === 0 && <div className="border-b border-dashed border-gray-800 min-h-[165px] flex items-center justify-center">
 
                         <div className="text-center">
 
-                            {/* Heading */}
+
                             <h2 className="text-[12px] font-black tracking-wide uppercase text-gray-200">
                                 Nothing Here Yet
                             </h2>
 
-                            {/* Description */}
+
                             <p className="mt-1 text-[8px] text-gray-500">
                                 Browse the library and add a lift to get today moving.
                             </p>
 
-                            {/* Button */}
+
                             <button
                                 className="btn btn-sm min-h-0 h-7 mt-4 px-5 rounded-full
                         bg-lime-400 hover:bg-lime-300
@@ -153,16 +192,28 @@ const page = () => {
                 }
                 {
                     state === "plan" &&
-                    Plan.map((p, ind) => (
-                        <Selected p={p} state={state} key={ind} />
+
+                    sortedData.map((p) => (
+                        <Selected
+                            p={p}
+                            state={state}
+                            key={p.id}
+                        />
                     ))
+
                 }
 
                 {
                     state === "save" &&
-                    saved.map((p, ind) => (
-                        <Selected p={p} state={state} key={ind} />
+
+                    sortedData.map((p) => (
+                        <Selected
+                            p={p}
+                            state={state}
+                            key={p.id}
+                        />
                     ))
+
                 }
 
             </div>

@@ -1,13 +1,11 @@
-// import React from 'react';
 
-// import { userContext } from "@/app/context/UserProvider";
 import Btn from "@/Components/btn";
 import Image from "next/image";
-// import { useContext } from "react";
+
 
 const page = async ({ params }) => {
     const { id } = await params;
-    // console.log(id);
+
     const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
     const data = await res.json();
 
