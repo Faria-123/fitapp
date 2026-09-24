@@ -3,17 +3,42 @@
 
 import { userContext } from "@/app/context/UserProvider";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 const Btn = ({ data }) => {
     const {
         Plan, setPlan, saved, setSaved
     } = useContext(userContext);
+
+
     const handlePlan = () => {
+        if (Plan.some(item => item.id === data.id)) {
+            toast.info("Already added to Plan!");
+            return;
+        }
+
+        if (saved.some(item => item.id === data.id)) {
+            toast.info("Already saved!");
+            return;
+        }
+
         setPlan([...Plan, data]);
-    }
+        toast.success("Successfully added to Plan!");
+    };
     const handleSave = () => {
+        if (saved.some(item => item.id === data.id)) {
+            toast.info("Already saved!");
+            return;
+        }
+
+        if (Plan.some(item => item.id === data.id)) {
+            toast.info("Already added to Plan!");
+            return;
+        }
+
         setSaved([...saved, data]);
-    }
+        toast.success("Successfully added to Saved!");
+    };
     console.log(Plan, saved);
     return (
 
