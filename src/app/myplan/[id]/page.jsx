@@ -1,6 +1,7 @@
 
 import Btn from "@/Components/btn";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 
 const page = async ({ params }) => {
@@ -8,7 +9,6 @@ const page = async ({ params }) => {
 
     const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
     const data = await res.json();
-
 
 
     return (

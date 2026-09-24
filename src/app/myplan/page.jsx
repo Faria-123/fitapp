@@ -133,7 +133,7 @@ const page = () => {
                     <div className="flex items-center gap-3">
 
                         <span className="text-[9px] text-gray-500">
-                            Sort By
+                            SortBy
                         </span>
 
                         <select

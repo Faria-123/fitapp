@@ -1,9 +1,14 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const Card = ({ d }) => {
+    const handleDetails = () => {
+        toast.info(`Opening ${d.name} details...`);
+    };
     return (
-        <Link href={`/myplan/${d.id}`}>
+        <Link href={`/myplan/${d.id}`} onClick={handleDetails} >
             <div className="card  overflow-hidden rounded-xl border border-white/10 bg-[#15171D] shadow-lg">
 
 
